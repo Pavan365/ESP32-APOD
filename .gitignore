@@ -1,5 +1,8 @@
-# Ignore environment file.
+# Ignore environment variables file.
 .env
+
+# Ignore secrets file.
+secrets.h
 
 # Ignore local VS Code settings.
 .vscode/
