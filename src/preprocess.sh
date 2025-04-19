@@ -8,5 +8,5 @@ python3 preprocess.py
 
 # Push the preprocessed APOD image to remote.
 git add ../image/apod.jpg
-git commit -m chore: update preprocessed APOD image
+git commit -m "chore: update preprocessed APOD image"
 git push
