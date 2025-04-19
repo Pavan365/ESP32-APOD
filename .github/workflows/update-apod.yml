@@ -1,0 +1,40 @@
+name: Update Preprocessed APOD Image
+
+on:
+  schedule:
+  - cron: "0 6 * * *"
+  workflow_dispatch:
+
+jobs:
+  update-apod:
+    runs-on: ubuntu-22.04
+    env:
+      APOD_API_KEY: ${{ secrets.APOD_API_KEY }}
+    
+    steps:
+    - name: Checkout GitHub Repo
+      uses: actions/checkout@v4.2.2
+    
+    - name: Setup Environment
+      uses: actions/setup-python@v4.9.0
+      with:
+        python-version: "3.12"
+    
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests pillow
+    
+    - name: Run APOD Preprocessing Script
+      run: |
+        cd src
+        python preprocess.py
+        cd ..
+        
+    - name: Commit & Push Updated Preprocessed APOD Image
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add image/apod.jpg
+        git commit -m "chore: update preprocessed APOD image" || echo "no changes to commit"
+        git push
