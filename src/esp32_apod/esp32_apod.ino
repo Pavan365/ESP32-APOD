@@ -450,6 +450,9 @@ void setup() {
     // Begin serial communication (Baud = 115200).
     Serial.begin(115200);
 
+    // Turn on the Wi-Fi module.
+    WiFi.mode(WIFI_STA);
+
     // Initialise a SPIFFS mount.
     if (!SPIFFS.begin(false)) {
         // Output error information.
@@ -547,6 +550,9 @@ void setup() {
 
     // Disconnect from the Wi-Fi network.
     WiFi.disconnect(false, true);
+
+    // Turn off the Wi-Fi module.
+    WiFi.mode(WIFI_OFF);
 }
 
 
