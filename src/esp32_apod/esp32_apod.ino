@@ -367,6 +367,7 @@ bool
 bool drawImage(const char* path) {
     // Setup the TFT screen.
     tft.init();
+    tft.setRotation(3);
     tft.fillScreen(TFT_BLACK);
 
     // Setup the JPEG decoder (TJpg_Decoder).
@@ -377,15 +378,15 @@ bool drawImage(const char* path) {
     uint16_t width = 0, height = 0;
     TJpgDec.getFsJpgSize(&width, &height, path);
 
-    // If the width is larger than the height, set the rotation to landscape.
-    if (width >= height) {
-        tft.setRotation(3);
-    }
+    // // If the width is larger than the height, set the rotation to landscape.
+    // if (width >= height) {
+    //     tft.setRotation(3);
+    // }
 
-    // Otherwise, set the rotation to portrait.
-    else {
-        tft.setRotation(0);
-    }
+    // // Otherwise, set the rotation to portrait.
+    // else {
+    //     tft.setRotation(0);
+    // }
 
     // Store the image scaling (default = 8).
     uint8_t scale = 8;
